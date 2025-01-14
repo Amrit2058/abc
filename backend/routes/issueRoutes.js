@@ -7,5 +7,5 @@ router.get("/", issueController.getAllIssues);
 router.post("/", issueController.createIssue);
 router.patch("/:id/status", issueController.updateIssueStatus);
 router.delete("/:id", issueController.deleteIssue);
-
+router.patch("/:id/archive", issueController.archiveIssue);
 module.exports = router;

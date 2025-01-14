@@ -15,6 +15,7 @@ const issueSchema = new mongoose.Schema(
       enum: ["Pending", "In Progress", "Completed"],
       default: "Pending",
     },
+    archivedAt: { type: Date, default: null }
   },
   {
     timestamps: true,
