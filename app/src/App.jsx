@@ -1,24 +1,20 @@
-import HomePage from "./pages/home/home";
+import HomePage from "./pages/home";
 import AddIssuePage from "./pages/issues/add";
-import ListIssues from "./pages/issues/IssuesList/IssuesList";
-import ArchivedIssues from "./pages/archived/archivedList/ArchivedList";
-import "./styles/app.css";
-import "./styles/Global.css";
+import "./styles/app.scss";
 
 import { Routes, Route } from "react-router";
+import IssueContextProvider from "./context/issue";
 
 
 const App = () => {
   
   return (
-    <>
-    <Routes>
-      <Route path="/"  element={<HomePage />} />
-      <Route path="/issues/add" element={<AddIssuePage />} />
-      <Route path="/issuesList" element={<ListIssues/>} />
-      <Route path= "/archivedList" element={<ArchivedIssues/>} />
-    </Routes>
-    </>
+    <IssueContextProvider>
+      <Routes>
+        <Route path="/"  element={<HomePage />} />
+        <Route path="/issues/add" element={<AddIssuePage />} />
+      </Routes>
+    </IssueContextProvider>
   );
 };
 

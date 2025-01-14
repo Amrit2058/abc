@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import "./IssueList.css";
+import "./IssueList.scss";
+import SingleIssue from "./SingleIssue";
 
-const IssueList = ({ issues, updateStatus, deleteIssue, archiveIssue }) => {
+const IssueList = ({ issues }) => {
   const [filter, setFilter] = useState("All");
 
   const filteredIssues =
     filter === "All"
       ? issues
       : issues.filter((issue) => issue.status === filter);
+
+  if(issues.length === 0) {
+    return <p>No issues found.</p>;
+  }
 
   return (
     <div className="big-div">
@@ -27,10 +32,7 @@ const IssueList = ({ issues, updateStatus, deleteIssue, archiveIssue }) => {
       </div>
 
       {/* Main Issues Table */}
-      {filteredIssues.length === 0 ? (
-        <p>No issues found for the selected filter.</p>
-      ) : (
-        <table>
+      <table>
           <thead>
             <tr>
               <th>Ticket ID</th>
@@ -46,53 +48,10 @@ const IssueList = ({ issues, updateStatus, deleteIssue, archiveIssue }) => {
           </thead>
           <tbody>
             {filteredIssues.map((issue) => (
-              <tr key={issue._id}>
-                <td>{issue.ticketId}</td>
-                <td>
-                  {issue.dateRange
-                    ? `${new Date(
-                        issue.dateRange.startDate
-                      ).toLocaleDateString()} to ${new Date(
-                        issue.dateRange.endDate
-                      ).toLocaleDateString()}`
-                    : "N/A"}
-                </td>
-                <td>{issue.site}</td>
-                <td>{issue.topic}</td>
-                <td>{issue.summary}</td>
-                <td>{issue.status}</td>
-                <td>{new Date(issue.createdAt).toLocaleString()}</td>
-                <td>{new Date(issue.updatedAt).toLocaleString()}</td>
-                <td>
-                  <select
-                    value={issue.status}
-                    onChange={(e) => updateStatus(issue._id, e.target.value)}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                  </select>
-
-                  <button
-                    className="archive-button"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          "Are you sure you want to archive this issue?"
-                        )
-                      ) {
-                        archiveIssue(issue._id);
-                      }
-                    }}
-                  >
-                    Archive
-                  </button>
-                </td>
-              </tr>
+             <SingleIssue issue={issue} key={issue._id} /> 
             ))}
           </tbody>
         </table>
-      )}
     </div>
   );
 };

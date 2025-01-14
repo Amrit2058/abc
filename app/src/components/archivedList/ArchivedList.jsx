@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { axiosClient } from "../../lib/axios";
+import { issueContext } from "../../context/issue";
 
-const ArchivedIssues = ({ archivedIssues, deleteFromArchive, goToArchivedList }) => {  // Make sure goToArchivedList is passed as a prop
+const ArchivedList = ({ archivedIssues }) => { 
+  
+  const { setIssues } = useContext(issueContext);
+
+  async function deleteIssue(issue) {
+   const response = await axiosClient.delete(`/issues/${issue._id}`);
+   setIssues(response.data);
+  }
+  
   return (
     <>
-      <div className="big-div">
-        {/* Button to Navigate to Archived List */}
-        <div className="archived-list-button">
-          <button onClick={goToArchivedList} className="go-to-archived-button">
-            View Archived Issues
-          </button>
-        </div>
-      </div>
       <div>
         <h3>Archived Issues</h3>
         {archivedIssues.length === 0 ? (
@@ -52,7 +54,7 @@ const ArchivedIssues = ({ archivedIssues, deleteFromArchive, goToArchivedList })
                             "Are you sure you want to delete this issue permanently?"
                           )
                         ) {
-                          deleteFromArchive(issue._id);
+                          deleteIssue(issue);
                         }
                       }}
                     >
@@ -69,4 +71,4 @@ const ArchivedIssues = ({ archivedIssues, deleteFromArchive, goToArchivedList })
   );
 };
 
-export default ArchivedIssues;
+export default ArchivedList;

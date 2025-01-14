@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import "./style.css";
+import React, { useContext, useState } from "react";
+import "./style.scss";
+import { useNavigate } from "react-router";
+import { axiosClient } from "../../../lib/axios";
+import { issueContext } from "../../../context/issue";
 
-const ListIssues = () => {
+const AddIssuePage = () => {
   const [issue, setIssue] = useState({
     ticketId: "",
     site: "",
@@ -9,9 +12,22 @@ const ListIssues = () => {
     summary: "",
     status: "",
   });
-
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const { setIssues } = useContext(issueContext);
+
+  const navigate = useNavigate();
+  const addIssue = async (newIssue) => {
+    try {
+      const response = await axiosClient.post("/issues", newIssue);
+      setIssues(response.data);
+      navigate("/");
+    } catch(error) {
+      alert(error.message);
+      console.error(error);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +42,7 @@ const ListIssues = () => {
     setEndDate(e.target.value);
   };
 
-  const handleAddIssue = () => {
+  const handleAddIssue = async () => {
     if (
       issue.ticketId &&
       startDate &&
@@ -36,15 +52,7 @@ const ListIssues = () => {
       issue.summary &&
       issue.status
     ) {
-      setIssue({
-        ticketId: "",
-        site: "",
-        topic: "",
-        summary: "",
-        status: "",
-      });
-      setStartDate("");
-      setEndDate("");
+      await addIssue({...issue, dateRange: { startDate, endDate } });
     } else {
       alert("Please fill in all fields!");
     }
@@ -151,4 +159,4 @@ const ListIssues = () => {
   );
 };
 
-export default ListIssues;
+export default AddIssuePage;
