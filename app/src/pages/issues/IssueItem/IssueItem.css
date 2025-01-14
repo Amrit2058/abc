@@ -1,0 +1,63 @@
+.issue-item {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.issue-item p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.issue-item strong {
+  color: #333;
+}
+
+.issue-item .status {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 10px;
+  color: white;
+}
+
+.issue-item .status.plan {
+  background-color: #007bff;
+}
+
+.issue-item .status.working {
+  background-color: #ffc107;
+}
+
+.issue-item .status.completed {
+  background-color: #28a745;
+}
+
+.issue-item button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.issue-item button.delete {
+  background-color: #dc3545;
+}
+
+.issue-item button.delete:hover {
+  background-color: #c82333;
+}
+
+.issue-item button.update {
+  background-color: #007bff;
+}
+
+.issue-item button.update:hover {
+  background-color: #0056b3;
+}
