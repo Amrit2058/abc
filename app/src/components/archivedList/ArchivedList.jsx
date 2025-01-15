@@ -14,9 +14,9 @@ const ArchivedList = ({ archivedIssues }) => {
   return (
     <>
       <div>
-        <h3>Archived Issues</h3>
+        <h3>Archived Activities</h3>
         {archivedIssues.length === 0 ? (
-          <p>No archived issues.</p>
+          <p>No archived activities</p>
         ) : (
           <table>
             <thead>

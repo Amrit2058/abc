@@ -22,12 +22,11 @@ const AddIssuePage = () => {
       const response = await axiosClient.post("/issues", newIssue);
       setIssues(response.data);
       navigate("/");
-    } catch(error) {
+    } catch (error) {
       alert(error.message);
       console.error(error);
     }
   };
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +51,7 @@ const AddIssuePage = () => {
       issue.summary &&
       issue.status
     ) {
-      await addIssue({...issue, dateRange: { startDate, endDate } });
+      await addIssue({ ...issue, dateRange: { startDate, endDate } });
     } else {
       alert("Please fill in all fields!");
     }
