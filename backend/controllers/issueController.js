@@ -61,4 +61,26 @@ exports.archiveIssue = async (req, res) => {
   res.status(201).json(issues);
 }
 
+exports.getIssueForEdit = async(req, res) => {
+  try {
+    const issue = await Issue.findById(req.params.id);
+    if (!issue) return res.status(404).json({ message: "Issue not found" });
+    res.json(issue);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+}
 
+exports.editIssue = async(req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedIssue = await Issue.findByIdAndUpdate(id, req.body, {
+      new: true, // Return the updated document
+      runValidators: true, // Validate data against schema
+    });
+    if (!updatedIssue) return res.status(404).json({ message: "Issue not found" });
+    res.json(updatedIssue);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  } 
+}

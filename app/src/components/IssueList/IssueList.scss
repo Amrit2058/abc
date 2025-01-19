@@ -91,7 +91,19 @@ tbody td {
 }
 
 .filter{
-  float: right;
+  display: flex;
+  justify-content: space-between;
+}
+
+#filter-status{
+  margin-left: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+#filter-date{
+  margin-left: 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid black;
 }
 
 .archive-button{

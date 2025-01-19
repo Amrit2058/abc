@@ -65,7 +65,7 @@ export default function HomePage() {
 
         {/* Toggle Archived Issues Button */}
         <div id="toggle-archived" style={{ marginTop: "20px" }}>
-          <button onClick={toggleArchivedList}>
+          <button onClick={toggleArchivedList} id="archived-button">
             {showArchived ? "Hide Archived Issues" : "Show Archived Issues"}
           </button>
         </div>
