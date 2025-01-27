@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/"; // Replace with your actual backend URL
+const API_URL = "http://localhost:5000/";
 
 // Get all issues
 export const getAllIssues = async () => {
-  const response = await axios.get(API_URL);
-  return response.data;
+  const response = await axios.get(API_URL).then(;
+  return response.data);
 };
 
 // Create a new issue
